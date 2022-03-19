@@ -1,5 +1,5 @@
 import "./style.css";
-import Checklist from "./modules/checklist";
+import { Checklist } from "./modules/checklist";
 
 const app = document.getElementById("app");
 const button = document.createElement("button");
