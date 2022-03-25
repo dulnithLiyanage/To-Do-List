@@ -1,7 +1,7 @@
 import style from "../style.css";
 
 export const renderTask = (todo) => {
-  const toDoContainer = document.getElementById("checklist-container");
+  const toDoContainer = document.getElementById("todo-container");
   const toDoDiv = document.createElement("div");
   toDoDiv.classList.add("todo");
 
