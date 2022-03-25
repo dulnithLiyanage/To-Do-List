@@ -2,12 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do List</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="checklist-container">
+      <button id="open-modal">Click Me</button>
+    </div>
+
+    <dialog id="modal" class="modal">
+      <form id="form" method="dialog">
+        <label for="title"><input type="text" id="title" required /></label
+        ><label for="description"><input type="text" id="description" /></label
+        ><label for="due-date"
+          ><input type="date" id="due-date" required /></label
+        ><label for="priority"
+          ><input type="text" id="priority" required
+        /></label>
+        <button id="add-checklist" type="submit">Add</button>
+        <button id="close-modal" type="button">Close</button>
+      </form>
+    </dialog>
     <script type="module" src="./main.js"></script>
   </body>
 </html>

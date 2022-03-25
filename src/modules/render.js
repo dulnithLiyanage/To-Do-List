@@ -3,7 +3,7 @@ import style from "../style.css";
 export const renderTask = (todo) => {
   const toDoContainer = document.getElementById("checklist-container");
   const toDoDiv = document.createElement("div");
-  toDoDiv.classList.add("checklist");
+  toDoDiv.classList.add("todo");
 
   const title = document.createElement("h1");
   const description = document.createElement("p");
