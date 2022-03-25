@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(49, 49, 49);
+  color: #fff;
+}
+
+.todo > * {
+  margin-inline: 2em;
+}
+
+.todo .title {
+  font-size: 1.5rem;
+}
+
+.todo .description {
+  display: none;
+}
