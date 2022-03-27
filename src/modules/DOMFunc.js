@@ -1,24 +1,29 @@
 import {
+  eventRenderToDoContainer,
   eventOpenButton,
   eventCloseButton,
   eventAddTask,
 } from "./eventListeners";
 
-export const openModal = () => {
+export const renderToDoContainer = () => {
+  eventRenderToDoContainer();
+};
+
+export const openModalOnClick = () => {
   const openModalButton = document.querySelector("#open-modal");
   const modal = document.querySelector("#modal");
 
   eventOpenButton(openModalButton, modal);
 };
 
-export const closeModal = () => {
+export const closeModalOnClick = () => {
   const closeModalButton = document.querySelector("#close-modal");
   const modal = document.querySelector("#modal");
 
   eventCloseButton(closeModalButton, modal);
 };
 
-export const createChecklist = () => {
+export const createTaskOnClick = () => {
   const form = document.querySelector("#form");
 
   eventAddTask(form);
