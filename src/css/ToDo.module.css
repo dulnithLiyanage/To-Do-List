@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500;600&display=swap");
+
+:root {
+  --todo-base-grid-width: 88%;
+  --todo-base-margin-top: 1.3rem;
+}
+
+.toDoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 100vh;
+  background: url("../images/mountains.jpg") center right/cover no-repeat;
+}
+
+.openModal {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  position: absolute;
+  right: calc((100% - var(--todo-base-grid-width)) / 2);
+  bottom: 2rem;
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: var(--todo-base-grid-width);
+  min-height: 4.5rem;
+  background-color: rgba(53, 56, 54, 0.5);
+  color: #fff;
+  margin-top: var(--todo-base-margin-top);
+  border-radius: 12px;
+  backdrop-filter: blur(12px) brightness(70%);
+}
+
+.todo > * {
+  margin-inline: 2em;
+}
+
+.todo .title {
+  font-size: 1.15rem;
+  font-weight: 400;
+  backdrop-filter: none;
+}
+
+.todo .description {
+  display: none;
+}
+
+.todo .dueDate {
+  display: none;
+}
+
+.todo .priority {
+  display: none;
+}
