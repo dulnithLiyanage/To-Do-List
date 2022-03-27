@@ -11,3 +11,18 @@ export const ToDo = (title, description, dueDate, priority) => {
     getPriority,
   };
 };
+
+export const Project = (projectName, tasks) => {
+  const addTask = (task) => {
+    tasks.push(task);
+  };
+
+  const getProjectName = () => projectName;
+  const getTasks = () => tasks;
+
+  return {
+    addTask,
+    getProjectName,
+    getTasks,
+  };
+};
