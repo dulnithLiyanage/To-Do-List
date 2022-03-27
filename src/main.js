@@ -1,6 +1,12 @@
-import "./style.css";
-import { closeModal, createChecklist, openModal } from "./modules/DOMFunc";
+import "./css/resets.module.css";
+import {
+  renderToDoContainer,
+  closeModalOnClick,
+  createTaskOnClick,
+  openModalOnClick,
+} from "./modules/DOMFunc";
 
-openModal();
-closeModal();
-createChecklist();
+renderToDoContainer();
+openModalOnClick();
+closeModalOnClick();
+createTaskOnClick();
