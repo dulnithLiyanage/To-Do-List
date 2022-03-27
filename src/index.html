@@ -6,22 +6,35 @@
     <title>To Do List</title>
   </head>
   <body>
-    <div id="todo-container">
-      <button id="open-modal">Click Me</button>
-    </div>
-
-    <dialog id="modal" class="modal">
-      <form id="form" method="dialog">
-        <label for="title"><input type="text" id="title" required /></label
-        ><label for="description"><input type="text" id="description" /></label
-        ><label for="due-date"
-          ><input type="date" id="due-date" required /></label
-        ><label for="priority"
-          ><input type="text" id="priority" required
-        /></label>
-        <button id="add-todo" type="submit">Add</button>
-        <button id="close-modal" type="button">Close</button>
-      </form>
+    <div id="todo-container"></div>
+    <button id="open-modal"></button>
+    <dialog id="modal">
+      <div id="form-container">
+        <form id="form" method="dialog">
+          <label for="title"
+            ><div class="label">Title</div>
+            <input type="text" id="title" required /></label
+          ><label for="description">
+            <div class="label">Description</div>
+            <textarea
+              name="description"
+              id="description"
+              cols="30"
+              rows="10"
+            ></textarea></label
+          ><label for="due-date"
+            ><div class="due-label">Due Date</div>
+            <input type="date" id="due-date" required /></label
+          ><label for="priority"
+            ><div class="label">Priority</div>
+            <input type="text" id="priority" required
+          /></label>
+          <div id="button-container">
+            <button id="add-todo" type="submit">Add</button>
+            <button id="close-modal" type="button">Close</button>
+          </div>
+        </form>
+      </div>
     </dialog>
     <script type="module" src="./main.js"></script>
   </body>
