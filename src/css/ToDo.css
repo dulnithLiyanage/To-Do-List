@@ -1,11 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500;600&display=swap");
-
 :root {
   --todo-base-grid-width: 88%;
   --todo-base-margin-top: 1.3rem;
 }
 
-.toDoContainer {
+.todo-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +13,7 @@
   background: url("../images/mountains.jpg") center right/cover no-repeat;
 }
 
-.openModal {
+.open-modal {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
@@ -47,14 +45,8 @@
   backdrop-filter: none;
 }
 
-.todo .description {
-  display: none;
-}
-
-.todo .dueDate {
-  display: none;
-}
-
-.todo .priority {
+.todo .description,
+.due-date,
+.priority {
   display: none;
 }
