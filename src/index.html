@@ -8,9 +8,9 @@
   <body>
     <div id="todo-container"></div>
     <button id="open-modal"></button>
-    <dialog id="modal">
-      <div id="form-container">
-        <form id="form" method="dialog">
+    <dialog id="modal" class="modal">
+      <div class="form-container">
+        <form id="form" class="form" method="dialog">
           <label for="title"
             ><div class="label">Title</div>
             <input type="text" id="title" required /></label
@@ -29,9 +29,9 @@
             ><div class="label">Priority</div>
             <input type="text" id="priority" required
           /></label>
-          <div id="button-container">
+          <div class="button-container">
+            <button id="close-modal" type="button">Cancel</button>
             <button id="add-todo" type="submit">Add</button>
-            <button id="close-modal" type="button">Close</button>
           </div>
         </form>
       </div>
