@@ -1,13 +1,8 @@
 import {
-  eventRenderToDoContainer,
   eventOpenButton,
   eventCloseButton,
   eventAddTask,
 } from "./eventListeners";
-
-export const renderToDoContainer = () => {
-  eventRenderToDoContainer();
-};
 
 export const openModalOnClick = () => {
   const openModalButton = document.querySelector("#open-modal");

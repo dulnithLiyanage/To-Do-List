@@ -1,13 +1,5 @@
 import "../css/ToDo.css";
 
-export const renderToDoContainer = () => {
-  const toDoContainer = document.getElementById("todo-container");
-  const openModalButton = document.getElementById("open-modal");
-
-  toDoContainer.classList.add("todo-container");
-  openModalButton.classList.add("open-modal");
-};
-
 export const renderTask = (todo) => {
   const toDoContainer = document.getElementById("todo-container");
   const toDoDiv = document.createElement("div");

@@ -1,11 +1,5 @@
 import { ToDo } from "./components";
-import { renderToDoContainer, renderTask } from "./render";
-
-export const eventRenderToDoContainer = () => {
-  document.addEventListener("DOMContentLoaded", () => {
-    renderToDoContainer();
-  });
-};
+import { renderTask } from "./render";
 
 export const eventOpenButton = (button, modal) => {
   button.addEventListener("click", () => {
