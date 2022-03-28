@@ -1,4 +1,6 @@
-import "./css/resets.module.css";
+import "./css/resets.css";
+import "./css/Form.css";
+
 import {
   renderToDoContainer,
   closeModalOnClick,
