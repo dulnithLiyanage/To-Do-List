@@ -13,7 +13,7 @@
   background: url("../images/mountains.jpg") center right/cover no-repeat;
 }
 
-.open-modal {
+#open-modal {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
