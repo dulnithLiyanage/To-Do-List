@@ -6,36 +6,59 @@
     <title>To Do List</title>
   </head>
   <body>
-    <div id="todo-container" class="todo-container"></div>
-    <button id="open-modal"></button>
-    <dialog id="modal" class="modal">
-      <div class="form-container">
-        <form id="form" class="form" method="dialog">
-          <label for="title"
-            ><div class="label">Title</div>
-            <input type="text" id="title" required /></label
-          ><label for="description">
-            <div class="label">Description</div>
-            <textarea
-              name="description"
-              id="description"
-              cols="30"
-              rows="10"
-            ></textarea></label
-          ><label for="due-date"
-            ><div class="due-label">Due Date</div>
-            <input type="date" id="due-date" required /></label
-          ><label for="priority"
-            ><div class="label">Priority</div>
-            <input type="text" id="priority" required
-          /></label>
-          <div class="button-container">
-            <button id="close-modal" type="button">Cancel</button>
-            <button id="add-todo" type="submit">Add</button>
-          </div>
-        </form>
+    <main>
+      <div class="sidebar hide-sidebar">
+        <i class="icon-close" id="close-sidebar"></i>
+        <ul>
+          <li class="collection">Inbox</li>
+          <li class="collection">Important</li>
+          <li>
+            Projects
+            <ul class="projects"></ul>
+          </li>
+        </ul>
+        <div class="add-project-container">
+          <p class="add-project"><i class="icon-add-small"></i>New Project</p>
+        </div>
       </div>
-    </dialog>
+      <div id="todo-container" class="todo-container">
+        <i class="icon-menu" id="open-sidebar"></i>
+        <button id="open-modal">
+          <i class="icon-add"></i>
+        </button>
+        <h1 class="collection-name">Inbox</h1>
+      </div>
+
+      <dialog id="modal" class="modal">
+        <div class="form-container">
+          <form id="form" class="form" method="dialog">
+            <label for="title"
+              ><div class="label">Title</div>
+              <input type="text" id="title" required /></label
+            ><label for="description">
+              <div class="label">Description</div>
+              <textarea
+                name="description"
+                id="description"
+                cols="30"
+                rows="10"
+              ></textarea></label
+            ><label for="due-date"
+              ><div class="due-label">Due Date</div>
+              <input type="date" id="due-date" required /></label
+            ><label for="priority"
+              ><div class="label">Priority</div>
+              <input type="text" id="priority" required
+            /></label>
+            <div class="button-container">
+              <button id="close-modal" type="button">Cancel</button>
+              <button id="add-todo" type="submit">Add</button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+    </main>
+
     <script type="module" src="./main.js"></script>
   </body>
 </html>
