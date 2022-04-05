@@ -1,3 +1,5 @@
+export const ListOfCollections = [];
+
 export const ToDo = (title, description, dueDate, priority) => {
   const getTitle = () => title;
   const getDescription = () => description;
@@ -12,17 +14,17 @@ export const ToDo = (title, description, dueDate, priority) => {
   };
 };
 
-export const Project = (projectName, tasks) => {
+export const Collection = (collectionName, tasks) => {
   const addTask = (task) => {
     tasks.push(task);
   };
 
-  const getProjectName = () => projectName;
+  const getCollectionName = () => collectionName;
   const getTasks = () => tasks;
 
   return {
     addTask,
-    getProjectName,
+    getCollectionName,
     getTasks,
   };
 };
