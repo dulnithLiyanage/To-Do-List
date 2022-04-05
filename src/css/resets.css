@@ -10,6 +10,13 @@ body {
   font-family: "JetBrains Mono", monospace;
 }
 
+ul {
+  margin: 0;
+}
+
+li {
+  list-style-type: none;
+}
 button:focus,
 input:focus,
 textarea:focus {
@@ -23,4 +30,9 @@ button {
 
 button:hover {
   cursor: pointer;
+}
+
+main {
+  display: flex;
+  height: 100vh;
 }
