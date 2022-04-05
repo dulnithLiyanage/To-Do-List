@@ -1,5 +1,5 @@
 :root {
-  --form-background: #353836;
+  --form-background: rgba(54, 56, 54, 0.5);
   --form-text: #c5c5c5;
   --form-base-grid-width: 88%;
   --form-base-input-height: 3rem;
@@ -15,7 +15,7 @@
   min-height: 100vh;
   padding: 0;
   margin: 0;
-  background: url("../images/mountains.jpg") center right/cover no-repeat;
+  background: url("../images/background.jpg") center right/cover no-repeat;
 }
 
 .form-container {
@@ -25,7 +25,7 @@
   justify-content: flex;
   width: 100%;
   min-height: 100vh;
-  background-color: rgb(53, 56, 54, 0.5);
+  background-color: var(--form-background);
   backdrop-filter: blur(12px) brightness(70%);
 }
 
@@ -67,12 +67,13 @@ textarea {
 }
 
 .form #due-date {
-  width: 50%;
+  text-align: center;
+  padding: unset 1em;
   text-transform: uppercase;
 }
 
 .form #priority {
-  width: 50%;
+  width: 20%;
 }
 
 .form .button-container {
@@ -87,4 +88,13 @@ textarea {
   font-size: 16px;
   flex-basis: auto;
   border-radius: 12px;
+  color: white;
+}
+
+#add-todo {
+  background-color: #526a7c;
+}
+
+#close-modal {
+  background-color: #b85151;
 }
