@@ -10,7 +10,8 @@
   justify-content: flex-start;
   width: 100%;
   min-height: 100vh;
-  background: url("../images/mountains.jpg") center right/cover no-repeat;
+  background: url("../images/background.jpg") center right/cover no-repeat;
+  overflow: auto;
 }
 
 #open-modal {
@@ -20,6 +21,80 @@
   position: absolute;
   right: calc((100% - var(--todo-base-grid-width)) / 2);
   bottom: 2rem;
+  background-color: #8795a0;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  justify-content: center;
+  z-index: 1;
+}
+
+.icon-add {
+  --scale: 1.3;
+  margin-top: -2px;
+  position: relative;
+  transform: scale(var(--scale));
+  width: 16px;
+  height: 2px;
+  color: #212121;
+}
+
+.icon-add,
+.icon-add::after {
+  display: block;
+  box-sizing: border-box;
+  background: currentColor;
+  border-radius: 10px;
+}
+
+.icon-add::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 16px;
+  top: -7px;
+  left: 7px;
+}
+
+.collection-name {
+  align-self: flex-start;
+  margin-left: calc((100% - var(--todo-base-grid-width)) / 2 - 3px);
+  color: white;
+  margin-top: 4rem;
+}
+
+.icon-menu {
+  --scale: 1.3;
+  transform: scale(var(--scale));
+  position: absolute;
+  z-index: 1;
+  align-self: flex-start;
+  height: auto;
+  top: 2rem;
+  left: calc((100% - var(--todo-base-grid-width)) / 2);
+  cursor: pointer;
+}
+
+.icon-menu,
+.icon-menu::after,
+.icon-menu::before {
+  box-sizing: border-box;
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 3px;
+  background: white;
+}
+
+.icon-menu::after,
+.icon-menu::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+}
+
+.icon-menu::after {
+  top: 6px;
 }
 
 .todo {
@@ -30,7 +105,7 @@
   min-height: 4.5rem;
   background-color: rgba(53, 56, 54, 0.5);
   color: #fff;
-  margin-top: var(--todo-base-margin-top);
+  margin: calc(var(--todo-base-margin-top) / 2) 0;
   border-radius: 12px;
   backdrop-filter: blur(12px) brightness(70%);
 }
@@ -49,4 +124,14 @@
 .due-date,
 .priority {
   display: none;
+}
+
+@media (min-width: 1024px) {
+  .collection-name {
+    margin-top: 2rem;
+  }
+
+  .icon-menu {
+    display: none;
+  }
 }
