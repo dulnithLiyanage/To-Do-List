@@ -30,11 +30,10 @@ export const eventAddTask = (form, collection_object) => {
     const title = form.querySelector("#title").value;
     const description = form.querySelector("#description").value;
     const dueDate = form.querySelector("#due-date").value;
-    const priority = form.querySelector("#priority").value;
 
     const collectionName = document.querySelector(".collection-name");
 
-    const todo = ToDo(title, description, dueDate, priority);
+    const todo = ToDo(title, description, dueDate);
 
     const isNewCollection = false;
 
@@ -110,5 +109,78 @@ export const eventCloseSidebar = (button, sidebar) => {
 export const eventOpenSidebar = (button, sidebar) => {
   button.addEventListener("click", () => {
     sidebar.classList.remove("hide-sidebar");
+  });
+};
+
+export const taskCompletedClick = (
+  todoObject,
+  toDoDiv,
+  star,
+  dueDate,
+  circle
+) => {
+  circle.addEventListener("click", () => {
+    const importantCollection = ListOfCollections[1];
+    const collectionName = document.querySelector(".collection-name");
+
+    const title = toDoDiv.querySelector(".title");
+    const toDoContainer = document.querySelector(".todo-container");
+
+    const ListOfClasses = [...circle.classList];
+
+    if (ListOfClasses.includes("icon-circle")) {
+      circle.classList.remove("icon-circle");
+      circle.classList.add("icon-check");
+
+      title.classList.add("completed");
+      star.classList.add("hidden");
+      dueDate.classList.add("hidden");
+
+      todoObject.complete();
+
+      todoObject.unPrioritize();
+      importantCollection.removeTask(todoObject);
+
+      if (collectionName.textContent === "Important") {
+        toDoContainer.removeChild(toDoDiv);
+      }
+    } else if (ListOfClasses.includes("icon-check")) {
+      circle.classList.remove("icon-check");
+      circle.classList.add("icon-circle");
+
+      title.classList.remove("completed");
+      star.classList.remove("hidden");
+      dueDate.classList.remove("hidden");
+
+      todoObject.undoComplete();
+    }
+  });
+};
+
+export const taskMakeImportant = (todoObject, toDoDiv, star) => {
+  star.addEventListener("click", () => {
+    const importantCollection = ListOfCollections[1];
+    const collectionName = document.querySelector(".collection-name");
+
+    const toDoContainer = toDoDiv.parentNode;
+
+    const ListOfClasses = [...star.classList];
+
+    if (ListOfClasses.includes("icon-star")) {
+      star.classList.remove("icon-star");
+      star.classList.add("icon-star-fill");
+      todoObject.prioritize();
+      importantCollection.addTask(todoObject);
+    } else if (ListOfClasses.includes("icon-star-fill")) {
+      star.classList.remove("icon-star-fill");
+      star.classList.add("icon-star");
+
+      todoObject.unPrioritize();
+      importantCollection.removeTask(todoObject);
+
+      if (collectionName.textContent === "Important") {
+        toDoContainer.removeChild(toDoDiv);
+      }
+    }
   });
 };
