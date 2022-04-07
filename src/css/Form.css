@@ -72,10 +72,6 @@ textarea {
   text-transform: uppercase;
 }
 
-.form #priority {
-  width: 20%;
-}
-
 .form .button-container {
   position: absolute;
   right: calc((100% - var(--form-base-grid-width)) / 2);
