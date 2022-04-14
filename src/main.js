@@ -3,20 +3,19 @@ import "./css/Form.css";
 import "./css/Sidebar.css";
 import "./css/ToDo.css";
 
-import {
-  closeModalOnClick,
-  openModalOnClick,
-  closeSidebarOnClick,
-  openSidebarOnClick,
-  renderCollectionOnClick,
-  createProjectOnClick,
-  initializeDefaultCollections,
-} from "./modules/DOMFunc";
+import UI from "./modules/UI";
+import Storage from "./modules/Storage";
 
-openModalOnClick();
-closeModalOnClick();
-openSidebarOnClick();
-closeSidebarOnClick();
-initializeDefaultCollections();
-renderCollectionOnClick();
-createProjectOnClick();
+UI.loadInbox();
+UI.initAddTaskButtons();
+UI.initAddProjectButtons();
+UI.initTaskFunctionButtons();
+
+// Comment out when testing
+// Storage.clearTasks("Inbox");
+// Storage.clearTasks("Important");
+
+console.log(
+  "🚀 ~ file: main.js ~ line 18 ~ Storage.getProjectList().getProject('Inbox')",
+  Storage.getProjectList().getProject("Inbox")
+);
