@@ -3,6 +3,7 @@ import { renderTask, renderCollection, createProject } from "./render";
 
 export const eventInitalizeCollections = (collection) => {
   const collection_object = Collection(collection.innerText, []);
+
   ListOfCollections.push(collection_object);
 
   // Assigns an id to the collection
