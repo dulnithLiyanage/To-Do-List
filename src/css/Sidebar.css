@@ -32,6 +32,10 @@
   padding: 0 var(--sidebar-base-margin);
 }
 
+.project {
+  cursor: pointer;
+}
+
 .sidebar ul li:first-child {
   margin-top: 1em;
 }
