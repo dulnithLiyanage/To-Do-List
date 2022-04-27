@@ -32,8 +32,13 @@ export default class Project {
     this.tasks.push(newTask);
   }
 
-  deleteTask(taskName) {
-    this.tasks = this.tasks.filter((task) => task.name !== taskName);
+  deleteTask(task) {
+    this.tasks = this.tasks.filter((t) => t.title !== task.title);
+  }
+
+  updateTask(task) {
+    const taskIndex = this.tasks.findIndex((t) => t.getTitle() === task.title);
+    this.tasks[taskIndex] = task;
   }
 
   clearTasks() {
