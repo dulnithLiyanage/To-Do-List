@@ -52,11 +52,11 @@ export default class Storage {
     Storage.saveProjectList(projectList);
   }
 
-  static updateTaskProperty = (projectName, taskName, property, value) => {
+  static updateTask(projectName, task) {
     const projectList = Storage.getProjectList();
-    projectList.getProject(projectName).getTask(taskName)[property] = value;
+    projectList.getProject(projectName).updateTask(task);
     Storage.saveProjectList(projectList);
-  };
+  }
 
   static clearTasks(projectName) {
     const projectList = Storage.getProjectList();
