@@ -1,6 +1,6 @@
 import Project from "./Project";
 import Task from "./Task";
-import ProjectList from "./ProjectList";
+import App from "./App";
 
 export default class Storage {
   static saveProjectList(projectList) {
@@ -9,7 +9,7 @@ export default class Storage {
 
   static getProjectList() {
     const projectList = Object.assign(
-      new ProjectList(),
+      new App(),
       JSON.parse(localStorage.getItem("projectList"))
     );
 
