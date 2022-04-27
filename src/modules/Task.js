@@ -5,6 +5,7 @@ export default class Task {
     this.dueDate = dueDate;
     this.importance = false;
     this.completed = false;
+    this.parentProject = "Inbox";
   }
 
   getTitle() {
@@ -17,6 +18,10 @@ export default class Task {
 
   getDueDate() {
     return this.dueDate;
+  }
+
+  getParentProject() {
+    return this.parentProject;
   }
 
   checkIfImportant() {
@@ -37,5 +42,9 @@ export default class Task {
 
   setImportance(importance) {
     this.importance = importance;
+  }
+
+  setParentProject(parentProject) {
+    this.parentProject = parentProject;
   }
 }
