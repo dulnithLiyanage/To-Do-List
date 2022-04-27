@@ -14,8 +14,3 @@ UI.initTaskFunctionButtons();
 // Comment out when testing
 // Storage.clearTasks("Inbox");
 // Storage.clearTasks("Important");
-
-console.log(
-  "🚀 ~ file: main.js ~ line 18 ~ Storage.getProjectList().getProject('Inbox')",
-  Storage.getProjectList().getProject("Inbox")
-);
