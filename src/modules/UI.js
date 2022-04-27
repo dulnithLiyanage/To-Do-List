@@ -1,5 +1,6 @@
 import Task from "./Task";
 import Storage from "./Storage";
+import Project from "./Project";
 
 export default class UI {
   static loadInbox() {
@@ -38,28 +39,48 @@ export default class UI {
     const description = addTaskForm.querySelector("#description").value;
     const dueDate = addTaskForm.querySelector("#due-date").value;
 
-    const projectName = document.querySelector(".project-name");
+    const projectName = document.querySelector(".project-name").textContent;
 
     const taskObject = new Task(title, description, dueDate);
-    taskObject.setParentProject(projectName.innerText);
+    taskObject.setParentProject(projectName);
 
-    if (projectName.innerText === "Important") {
+    if (projectName === "Important") {
       taskObject.setImportance(true);
     }
 
-    if (projectName.innerText !== "Inbox") {
+    if (projectName !== "Inbox") {
       Storage.addTask("Inbox", taskObject);
     }
 
-    Storage.addTask(projectName.innerText, taskObject);
+    Storage.addTask(projectName, taskObject);
 
-    UI.renderTasksToContainer(projectName.innerText);
+    UI.renderTasksToContainer(projectName);
   };
 
-  // ADD PROJECT EVENT LISTENERS
-  static initAddProjectButtons = () => {
-    const addProjectButtons = document.querySelectorAll(".project");
-    addProjectButtons.forEach((button) => {
+  // SHOW ADDED PROJECTS IN SIDEBAR
+  static addNonDefaultProjects = () => {
+    const projectList = Storage.getProjectList().projects;
+
+    const nonDefaultProjects = projectList.filter((project) => {
+      return project.isDefault === false;
+    });
+
+    const projects = document.querySelector(".projects");
+
+    nonDefaultProjects.forEach((nonDefaultProject) => {
+      const project = document.createElement("li");
+      project.classList.add("project");
+      project.textContent = nonDefaultProject.getName();
+      projects.appendChild(project);
+    });
+
+    this.initRenderProjectButtons();
+  };
+
+  // RENDER PROJECT EVENT LISTENERS
+  static initRenderProjectButtons = () => {
+    const renderProjectButtons = document.querySelectorAll(".project");
+    renderProjectButtons.forEach((button) => {
       button.addEventListener("click", UI.renderProject);
     });
   };
@@ -67,6 +88,84 @@ export default class UI {
   static renderProject = (event) => {
     const projectName = event.target.textContent;
     UI.renderTasksToContainer(projectName);
+  };
+
+  // ADD PROJECT EVENT LISTENERS
+  static initAddProjectButton = () => {
+    const addProjectButton = document.querySelector(".add-project");
+    addProjectButton.addEventListener("click", UI.addProjectSelection);
+  };
+
+  static addProjectSelection = () => {
+    const addProjectButton = document.querySelector(".add-project");
+    const projectName = document.createElement("input");
+    const addButton = document.createElement("button");
+    const cancelButton = document.createElement("button");
+    const container = document.querySelector(".add-project-container");
+
+    projectName.classList.add("project-name-input");
+    projectName.placeholder = "Project Name";
+    addButton.classList.add("add-button");
+    addButton.textContent = "Add";
+    cancelButton.classList.add("cancel-button");
+    cancelButton.textContent = "Cancel";
+
+    addProjectButton.classList.add("hidden");
+    container.appendChild(projectName);
+    container.appendChild(addButton);
+    container.appendChild(cancelButton);
+
+    UI.initAddOrCancelButtons();
+  };
+
+  static initAddOrCancelButtons = () => {
+    const addButton = document.querySelector(".add-button");
+    const cancelButton = document.querySelector(".cancel-button");
+
+    addButton.addEventListener("click", UI.createProject);
+    cancelButton.addEventListener("click", UI.cancelProjectCreation);
+  };
+
+  static createProject = () => {
+    const projectName = document.querySelector(".project-name-input");
+    const addButton = document.querySelector(".add-button");
+    const cancelButton = document.querySelector(".cancel-button");
+    const container = document.querySelector(".add-project-container");
+
+    container.removeChild(projectName);
+    container.removeChild(addButton);
+    container.removeChild(cancelButton);
+
+    const addProjectButton = document.querySelector(".add-project");
+    addProjectButton.classList.toggle("hidden");
+
+    const projects = document.querySelector(".projects");
+
+    const project = document.createElement("li");
+    project.classList.add("project");
+    project.textContent = projectName.value;
+    projects.appendChild(project);
+
+    this.initRenderProjectButtons();
+
+    const projectObject = new Project(project.textContent);
+    projectObject.isDefault = false;
+
+    Storage.addProject(projectObject);
+  };
+
+  static cancelProjectCreation = () => {
+    const projectName = document.querySelector(".project-name-input");
+    const addButton = document.querySelector(".add-button");
+    const cancelButton = document.querySelector(".cancel-button");
+    const container = document.querySelector(".add-project-container");
+
+    container.removeChild(projectName);
+    container.removeChild(addButton);
+    container.removeChild(cancelButton);
+
+    const addProjectButton = document.querySelector(".add-project");
+    addProjectButton.classList.toggle("hidden");
   };
 
   // TASK EVENT LISTENERS
@@ -179,7 +278,7 @@ export default class UI {
         task.remove();
       });
 
-      projectNameElem.innerText = projectName;
+      projectNameElem.textContent = projectName;
       taskContainer.appendChild(projectNameElem);
     };
 
