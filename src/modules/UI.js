@@ -41,13 +41,19 @@ export default class UI {
     const projectName = document.querySelector(".project-name");
 
     const taskObject = new Task(title, description, dueDate);
+    taskObject.setParentProject(projectName.innerText);
+
+    if (projectName.innerText === "Important") {
+      taskObject.setImportance(true);
+    }
 
     if (projectName.innerText !== "Inbox") {
       Storage.addTask("Inbox", taskObject);
     }
-    Storage.addTask(projectName.textContent, taskObject);
 
-    UI.renderTasksToContainer(projectName.textContent);
+    Storage.addTask(projectName.innerText, taskObject);
+
+    UI.renderTasksToContainer(projectName.innerText);
   };
 
   // ADD PROJECT EVENT LISTENERS
@@ -94,10 +100,28 @@ export default class UI {
     const projectObject = Storage.getProjectList().getProject(projectName);
 
     const taskObject = projectObject.getTask(taskTitle);
+    const parentProjectOfTask = taskObject.getParentProject();
 
-    !taskObject.checkIfCompleted()
-      ? Storage.updateTaskProperty(projectName, taskTitle, "completed", true)
-      : Storage.updateTaskProperty(projectName, taskTitle, "completed", false);
+    if (taskObject.checkIfCompleted()) {
+      taskObject.unCompleteTask();
+      Storage.updateTask(projectName, taskObject);
+    } else {
+      taskObject.completeTask();
+      if (taskObject.checkIfImportant()) {
+        taskObject.setImportance(false);
+      }
+      Storage.updateTask(projectName, taskObject);
+    }
+
+    if (projectName === "Inbox") {
+      Storage.updateTask(parentProjectOfTask, taskObject);
+    } else {
+      Storage.updateTask("Inbox", taskObject);
+    }
+
+    if (taskObject.checkIfCompleted()) {
+      Storage.deleteTask("Important", taskObject);
+    }
 
     UI.renderTasksToContainer(projectName);
   };
@@ -109,10 +133,33 @@ export default class UI {
     const projectObject = Storage.getProjectList().getProject(projectName);
 
     const taskObject = projectObject.getTask(taskTitle);
+    const parentProjectOfTask = taskObject.getParentProject();
 
-    !taskObject.checkIfImportant()
-      ? Storage.updateTaskProperty(projectName, taskTitle, "importance", true)
-      : Storage.updateTaskProperty(projectName, taskTitle, "importance", false);
+    if (taskObject.checkIfImportant()) {
+      taskObject.setImportance(false);
+      Storage.updateTask(projectName, taskObject);
+    } else {
+      taskObject.setImportance(true);
+      Storage.updateTask(projectName, taskObject);
+    }
+
+    if (projectName === "Inbox") {
+      Storage.updateTask(parentProjectOfTask, taskObject);
+    } else {
+      Storage.updateTask("Inbox", taskObject);
+    }
+
+    if (projectName !== "Important") {
+      if (taskObject.checkIfImportant()) {
+        Storage.addTask("Important", taskObject);
+      } else {
+        Storage.deleteTask("Important", taskObject);
+      }
+    } else {
+      if (!taskObject.checkIfImportant()) {
+        Storage.deleteTask(projectName, taskObject);
+      }
+    }
 
     UI.renderTasksToContainer(projectName);
   };
@@ -127,6 +174,7 @@ export default class UI {
     const resetTaskContainer = () => {
       taskContainer.removeChild(projectNameElem);
       const taskDiv = document.querySelectorAll(".todo");
+
       taskDiv.forEach((task) => {
         task.remove();
       });
@@ -166,6 +214,10 @@ export default class UI {
 
       taskObject.checkIfCompleted()
         ? dueDateElem.classList.add("hidden")
+        : null;
+
+      taskObject.checkIfCompleted()
+        ? importantIcon.classList.add("hidden")
         : null;
 
       taskObject.checkIfImportant()
