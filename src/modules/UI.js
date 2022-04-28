@@ -98,43 +98,51 @@ export default class UI {
 
   static addProjectSelection = () => {
     const addProjectButton = document.querySelector(".add-project");
+    const form = document.createElement("form");
     const projectName = document.createElement("input");
     const addButton = document.createElement("button");
     const cancelButton = document.createElement("button");
     const container = document.querySelector(".add-project-container");
 
+    form.setAttribute("method", "dialog");
+    form.setAttribute("onsubmit", "return false;");
+    form.classList.add("add-project-form");
+
     projectName.classList.add("project-name-input");
     projectName.placeholder = "Project Name";
+    projectName.setAttribute("required", true);
+
     addButton.classList.add("add-button");
     addButton.textContent = "Add";
+    addButton.setAttribute("type", "submit");
+
     cancelButton.classList.add("cancel-button");
     cancelButton.textContent = "Cancel";
+    cancelButton.setAttribute("type", "button");
 
     addProjectButton.classList.add("hidden");
-    container.appendChild(projectName);
-    container.appendChild(addButton);
-    container.appendChild(cancelButton);
+    form.appendChild(projectName);
+    form.appendChild(addButton);
+    form.appendChild(cancelButton);
+
+    container.appendChild(form);
 
     UI.initAddOrCancelButtons();
   };
 
   static initAddOrCancelButtons = () => {
-    const addButton = document.querySelector(".add-button");
+    const form = document.querySelector(".add-project-form");
     const cancelButton = document.querySelector(".cancel-button");
 
-    addButton.addEventListener("click", UI.createProject);
+    form.addEventListener("submit", UI.createProject);
     cancelButton.addEventListener("click", UI.cancelProjectCreation);
   };
 
   static createProject = () => {
     const projectName = document.querySelector(".project-name-input");
-    const addButton = document.querySelector(".add-button");
-    const cancelButton = document.querySelector(".cancel-button");
-    const container = document.querySelector(".add-project-container");
+    const form = document.querySelector(".add-project-form");
 
-    container.removeChild(projectName);
-    container.removeChild(addButton);
-    container.removeChild(cancelButton);
+    form.remove();
 
     const addProjectButton = document.querySelector(".add-project");
     addProjectButton.classList.toggle("hidden");
@@ -155,14 +163,9 @@ export default class UI {
   };
 
   static cancelProjectCreation = () => {
-    const projectName = document.querySelector(".project-name-input");
-    const addButton = document.querySelector(".add-button");
-    const cancelButton = document.querySelector(".cancel-button");
-    const container = document.querySelector(".add-project-container");
+    const form = document.querySelector(".add-project-form");
 
-    container.removeChild(projectName);
-    container.removeChild(addButton);
-    container.removeChild(cancelButton);
+    form.remove();
 
     const addProjectButton = document.querySelector(".add-project");
     addProjectButton.classList.toggle("hidden");
@@ -216,6 +219,15 @@ export default class UI {
       Storage.updateTask(parentProjectOfTask, taskObject);
     } else {
       Storage.updateTask("Inbox", taskObject);
+    }
+
+    if (projectName === "Important") {
+      if (parentProjectOfTask !== "Inbox") {
+        Storage.updateTask(parentProjectOfTask, taskObject);
+        Storage.updateTask("Inbox", taskObject);
+      } else {
+        Storage.updateTask("Inbox", taskObject);
+      }
     }
 
     if (taskObject.checkIfCompleted()) {
