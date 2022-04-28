@@ -3,11 +3,11 @@ import Task from "./Task";
 import App from "./App";
 
 export default class Storage {
-  static saveProjectList(projectList) {
+  static saveProjectList = (projectList) => {
     localStorage.setItem("projectList", JSON.stringify(projectList));
-  }
+  };
 
-  static getProjectList() {
+  static getProjectList = () => {
     const projectList = Object.assign(
       new App(),
       JSON.parse(localStorage.getItem("projectList"))
@@ -26,41 +26,41 @@ export default class Storage {
     });
 
     return projectList;
-  }
+  };
 
-  static addProject(project) {
+  static addProject = (project) => {
     const projectList = Storage.getProjectList();
     projectList.addProject(project);
     Storage.saveProjectList(projectList);
-  }
+  };
 
-  static deleteProject(projectName) {
+  static deleteProject = (projectName) => {
     const projectList = Storage.getProjectList();
     projectList.deleteProject(projectName);
     Storage.saveProjectList(projectList);
-  }
+  };
 
-  static addTask(projectName, task) {
+  static addTask = (projectName, task) => {
     const projectList = Storage.getProjectList();
     projectList.getProject(projectName).addTask(task);
     Storage.saveProjectList(projectList);
-  }
+  };
 
-  static deleteTask(projectName, taskName) {
+  static deleteTask = (projectName, taskName) => {
     const projectList = Storage.getProjectList();
     projectList.getProject(projectName).deleteTask(taskName);
     Storage.saveProjectList(projectList);
-  }
+  };
 
-  static updateTask(projectName, task) {
+  static updateTask = (projectName, task) => {
     const projectList = Storage.getProjectList();
     projectList.getProject(projectName).updateTask(task);
     Storage.saveProjectList(projectList);
-  }
+  };
 
-  static clearTasks(projectName) {
+  static clearTasks = (projectName) => {
     const projectList = Storage.getProjectList();
     projectList.getProject(projectName).clearTasks();
     Storage.saveProjectList(projectList);
-  }
+  };
 }
