@@ -8,6 +8,8 @@ import UI from "./modules/UI";
 UI.loadInbox();
 UI.initAddTaskButtons();
 UI.addNonDefaultProjects();
+UI.initOpenSidebarIcon();
+UI.initCloseSidebarIcon();
 UI.initRenderProjectButtons();
 UI.initAddProjectButton();
 UI.initTaskFunctionButtons();

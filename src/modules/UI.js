@@ -77,11 +77,36 @@ export default class UI {
     this.initRenderProjectButtons();
   };
 
+  // OPEN SIDEBAR
+  static initOpenSidebarIcon = () => {
+    const openSidebarIcon = document.querySelector("#open-sidebar");
+
+    openSidebarIcon.addEventListener("click", UI.openSidebar);
+  };
+
+  static openSidebar = () => {
+    const sidebar = document.querySelector(".sidebar");
+    sidebar.classList.remove("hide-sidebar");
+  };
+
+  // CLOSE SIDEBAR ICON
+  static initCloseSidebarIcon = () => {
+    const closeSidebarIcon = document.querySelector("#close-sidebar");
+
+    closeSidebarIcon.addEventListener("click", UI.closeSidebar);
+  };
+
+  static closeSidebar = () => {
+    const sidebar = document.querySelector(".sidebar");
+    sidebar.classList.add("hide-sidebar");
+  };
+
   // RENDER PROJECT EVENT LISTENERS
   static initRenderProjectButtons = () => {
     const renderProjectButtons = document.querySelectorAll(".project");
     renderProjectButtons.forEach((button) => {
       button.addEventListener("click", UI.renderProject);
+      button.addEventListener("click", UI.closeSidebar);
     });
   };
 
@@ -105,8 +130,9 @@ export default class UI {
     const container = document.querySelector(".add-project-container");
 
     form.setAttribute("method", "dialog");
-    form.setAttribute("onsubmit", "return false;");
     form.classList.add("add-project-form");
+    // Prevents the form from submitting
+    form.setAttribute("onsubmit", "return false;");
 
     projectName.classList.add("project-name-input");
     projectName.placeholder = "Project Name";
@@ -315,21 +341,15 @@ export default class UI {
       descriptionElem.textContent = taskObject.getDescription();
       dueDateElem.textContent = taskObject.getDueDate();
 
-      taskObject.checkIfCompleted()
-        ? completeIcon.classList.add("icon-completed")
-        : completeIcon.classList.add("icon-not-completed");
+      if (taskObject.checkIfCompleted()) {
+        completeIcon.classList.add("icon-completed");
 
-      taskObject.checkIfCompleted()
-        ? titleElem.classList.add("completed")
-        : null;
-
-      taskObject.checkIfCompleted()
-        ? dueDateElem.classList.add("hidden")
-        : null;
-
-      taskObject.checkIfCompleted()
-        ? importantIcon.classList.add("hidden")
-        : null;
+        titleElem.classList.add("completed");
+        dueDateElem.classList.add("hidden");
+        importantIcon.classList.add("hidden");
+      } else {
+        completeIcon.classList.add("icon-not-completed");
+      }
 
       taskObject.checkIfImportant()
         ? importantIcon.classList.add("icon-important")
